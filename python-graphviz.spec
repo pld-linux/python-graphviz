@@ -1,16 +1,16 @@
 #
 # Conditional build:
-%bcond_without	doc	# Sphinx documentation
+%bcond_with	doc	# Sphinx documentation
 %bcond_without	tests	# unit tests
 %bcond_without	python2 # CPython 2.x module
-%bcond_without	python3 # CPython 3.x module
+%bcond_with	python3 # CPython 3.x module
 
 Summary:	Simple Python interface for Graphviz
 Summary(pl.UTF-8):	Prosty pythonowy interfejs do Graphviza
 Name:		python-graphviz
 # keep 0.16.x here for python2 support
 Version:	0.16
-Release:	5
+Release:	6
 Epoch:		1
 License:	MIT
 Group:		Libraries/Python
@@ -44,7 +44,7 @@ BuildRequires:	python3-pytest-mock >= 1.8
 %if %{with tests}
 BuildRequires:	graphviz
 %endif
-%if %{with apidocs}
+%if %{with doc}
 BuildRequires:	python3-sphinx_rtd_theme
 BuildRequires:	sphinx-pdg-3 >= 1.7
 %endif
@@ -91,7 +91,7 @@ Dokumentacja API modułu Pythona graphviz.
 
 %prep
 %setup -q -n graphviz-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %if %{with python2}
